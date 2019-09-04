@@ -20,7 +20,7 @@ adb sign $operationd_apk
 ## 1.2. 用法
 ### 1.2.1. 增加操作
 ```
-java -jar $zip_java_jar -a -f /Users/xxx/BusyBox_v63_apkpure.com.apk n "/Users/xxx/city2_.db" -p "assets/busybox-x86.png"
+java -jar $zip_java_jar -a -f /Users/xxx/BusyBox_v63_apkpure.com.apk -n "/Users/xxx/city2_.db" -p "assets/busybox-x86.png"
 ```
 ### 1.2.2. 删除操作
 ```
