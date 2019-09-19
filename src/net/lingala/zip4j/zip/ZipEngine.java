@@ -376,7 +376,6 @@ public class ZipEngine {
 
 				FileHeader fileHeader = Zip4jUtil.getFileHeader(zipModel, fileName);
 				if (fileHeader != null) {// 删除 apk 中的我们要拷贝的文件
-
 					System.out.println("delete file of apk  ==> " + fileName);
 
 					if (outputStream != null) {
@@ -398,9 +397,10 @@ public class ZipEngine {
 					progressMonitor
 							.setCurrentOperation(ProgressMonitor.OPERATION_ADD);
 
-					if (outputStream == null) {
+					if (outputStream == null) {//这里到底做什么 没什么用?
 						outputStream = prepareFileOutputStream();
-
+						if (outputStream == null)
+							return;
 						if (retMap != null) {
 							if (retMap.get(InternalZipConstants.OFFSET_CENTRAL_DIR) != null) {
 								long offsetCentralDir = -1;
@@ -447,6 +447,8 @@ public class ZipEngine {
 		
 		try {
 			File outFile = new File(outPath);
+			if (outFile.getParentFile() == null)
+				return null;
 			if (!outFile.getParentFile().exists()) {
 				outFile.getParentFile().mkdirs();
 			}

@@ -34,6 +34,17 @@ public class Main {
             String file_operate = cmd.getOptionValue("n");
             String in_zip_path = cmd.getOptionValue("p");
 
+            if (cmd.hasOption("f"))
+            {
+                File testFile = new File(apk_path);
+                if(!testFile.exists())
+                {
+                    HelpFormatter formatter = new HelpFormatter();
+                    System.out.println("eg: need -f file exitst");
+                    formatter.printHelp("java -jar zip.jar ",options);
+                    return;
+                }
+            }
             if (cmd.hasOption("r") && cmd.hasOption("f")) {
                 ZipUtils.deleteArchDir(apk_path);
                 return;
@@ -45,23 +56,26 @@ public class Main {
 
             if ( apk_path == null ) {
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db", options);
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ", options);
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -d -p assets/xxx2.db", options);
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db");
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ");
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -d -p assets/xxx2.db");
+                formatter.printHelp("java -jar zip.jar ",options);
                 return;
             }
 
             if (cmd.hasOption("d") && in_zip_path == null)
             {
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -d -p assets/xxx2.db", options);
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -d -p assets/xxx2.db");
+                formatter.printHelp("java -jar zip.jar ",options);
                 return;
             }
 
-            if (cmd.hasOption("a") && file_operate == null) {
+            if (cmd.hasOption("a") && file_operate == null) {//
                 HelpFormatter formatter = new HelpFormatter();
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db", options);
-                formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ", options);
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db");
+                System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ");
+                formatter.printHelp("java -jar zip.jar ",options);
                 return;
             }
             if (cmd.hasOption("a")){
@@ -69,8 +83,9 @@ public class Main {
                 if(!testFile.exists())
                 {
                     HelpFormatter formatter = new HelpFormatter();
-                    formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db", options);
-                    formatter.printHelp("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ", options);
+                    System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db -p assets/xxx2.db");
+                    System.out.println("eg: java -jar zip.jar -f xxx.apk -a -n xxx/xxx/xxx.db ");
+                    formatter.printHelp("java -jar zip.jar ",options);
                     return;
                 }
                 else{
@@ -83,9 +98,7 @@ public class Main {
             System.out.println("file_operate        ==> " + file_operate);
             System.out.println("in_zip_path         ==> " + in_zip_path);
             if (cmd.hasOption("d")) {
-
-            System.out.println("delete file         ==> " + in_zip_path);
-
+                System.out.println("delete file         ==> " + in_zip_path);
                 ZipUtils.deleteFile(apk_path, in_zip_path);
             }
             if (cmd.hasOption("a")) {
